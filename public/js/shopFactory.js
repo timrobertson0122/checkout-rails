@@ -5,9 +5,9 @@ clothesShop.factory('Products', ['Flash', function(Flash) {
 
     service.basketTotal = 0;
     service.shoppingBasket = shoppingBasket;
-    service.fivePoundDiscount = false;
-    service.tenPoundDiscount = false;
-    service.fifteenPoundDiscount = false;
+    service.fivePercentDiscount = false;
+    service.twentyPoundDiscount = false;
+    service.twentyPercentDiscount = false;
 
     service.productList = {
         "Smart Technology Products": [{
@@ -39,9 +39,9 @@ clothesShop.factory('Products', ['Flash', function(Flash) {
     };
 
     service.availableDiscounts = function() {
-        service.fivePoundDiscount = true;
-        service.tenPoundDiscount = true;
-        service.fifteenPoundDiscount = true;
+        service.fivePercentDiscount = true;
+        service.twentyPoundDiscount = true;
+        service.twentyPercentDiscount = true;
     };
 
     service.getBasketTotal = function() {
@@ -64,7 +64,11 @@ clothesShop.factory('Products', ['Flash', function(Flash) {
 
     service.discountTotal = function() {
         var result = service.subTotal() - service.basketTotal;
-        return result;
+        if (result > 0.00) {
+          return result
+        } else {
+          return 0.00
+        };
     };
 
     service.itemAvailable = function(item) {
@@ -104,37 +108,46 @@ clothesShop.factory('Products', ['Flash', function(Flash) {
         }
     };
 
-    service.ShoesInBasket = function() {
-        for (var i = shoppingBasket.length - 1; i >= 0; i--) {
-            if (shoppingBasket[i].category.indexOf("Footwear") >= 0) {
-                return true;
-            }
+    service.applyFivePercentDiscount = function() {
+      if (service.twentyPercentDiscount && service.fivePercentDiscount) {
+          service.basketTotal = (service.basketTotal * 0.95);
+          service.fivePercentDiscount = false;
+      } else {
+          Flash.create('danger', 'Sorry, you cannot combine with 20% off voucher');
+      }
+    };
+
+    service.removefivePercentDiscount = function() {
+      service.basketTotal += service.discountTotal();
+      service.fivePercentDiscount = true;
+    }
+
+    service.applyTwentyPoundDiscount = function() {
+        if (service.twentyPercentDiscount && service.twentyPoundDiscount) {
+            service.basketTotal -= 20.00;
+            service.twentyPoundDiscount = false;
+        } else {
+            Flash.create('danger', 'Sorry, you cannot combine with 20% off voucher');
         }
     };
 
-    service.applyFivePoundDiscount = function() {
-        if (service.fivePoundDiscount) {
-            service.basketTotal -= 5.00;
-            service.fivePoundDiscount = false;
+    service.removeTwentyPoundDiscount = function() {
+      service.basketTotal += service.discountTotal();
+      service.twentyPoundDiscount = true;
+    };
+
+    service.applyTwentyPercentDiscount = function() {
+        if (service.fivePercentDiscount && service.twentyPoundDiscount) {
+            service.basketTotal = (service.basketTotal * 0.80);
+            service.twentyPercentDiscount = false;
+        } else {
+            Flash.create('danger', 'Sorry, discount cannot be combined with others');
         }
     };
 
-    service.applyTenPoundDiscount = function() {
-        if (service.basketTotal < 50.00) {
-            Flash.create('danger', 'Sorry, you must spend over £50.');
-        } else if (service.tenPoundDiscount) {
-            service.basketTotal -= 10.00;
-            service.tenPoundDiscount = false;
-        }
-    };
-
-    service.applyFifteenPoundDiscount = function() {
-        if (service.basketTotal < 75.00 || !service.ShoesInBasket()) {
-            Flash.create('danger', 'Sorry, discount only available for orders over £75 and including at least one item of footwear');
-        } else if (service.fifteenPoundDiscount) {
-            service.basketTotal -= 15.00;
-            service.fifteenPoundDiscount = false;
-        }
+    service.removeTwentyPercentDiscount = function() {
+      service.basketTotal += service.discountTotal();
+      service.twentyPercentDiscount = true;
     };
 
     return service;

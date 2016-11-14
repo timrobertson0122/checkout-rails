@@ -55,9 +55,9 @@
                     </ul>
                     <div>
                         <ul class="vouchers">
-                            <li><a class="btn" id="five-pound-voucher" ng-class="ctrl.products.fivePoundDiscount ? 'btn-success' : 'btn-danger'" ng-click="ctrl.products.applyFivePoundDiscount()">£5 off voucher</a></li>
-                            <li><a class="btn" id="ten-pound-voucher" ng-class="ctrl.products.tenPoundDiscount ? 'btn-success' : 'btn-danger'" ng-click="ctrl.products.applyTenPoundDiscount()">£10 off voucher</a></li>
-                            <li><a class="btn" id="fifteen-pound-voucher" ng-class="ctrl.products.fifteenPoundDiscount ? 'btn-success' : 'btn-danger'" ng-click="ctrl.products.applyFifteenPoundDiscount()">£15 off voucher</a></li>
+                            <li><a class="btn" id="five-pound-voucher" ng-class="ctrl.products.fivePercentDiscount ? 'btn-success' : 'btn-danger'" ng-click="ctrl.products.applyFivePercentDiscount()">5% Off Voucher</a><span ng-show= "!ctrl.products.fivePercentDiscount" class= "pull-right glyphicon glyphicon-remove remove" ng-click="ctrl.products.removefivePercentDiscount()"></span></li>
+                            <li><a class="btn" id="ten-pound-voucher" ng-class="ctrl.products.twentyPoundDiscount ? 'btn-success' : 'btn-danger'" ng-click="ctrl.products.applyTwentyPoundDiscount()">£20 off voucher</a><span ng-show= "!ctrl.products.twentyPoundDiscount" class=" pull-right glyphicon glyphicon-remove remove" ng-click="ctrl.products.removeTwentyPoundDiscount()"></span></li>
+                            <li><a class="btn" id="fifteen-pound-voucher" ng-class="ctrl.products.twentyPercentDiscount ? 'btn-success' : 'btn-danger'" ng-click="ctrl.products.applyTwentyPercentDiscount()">20% off Voucher</a><span ng-show= "!ctrl.products.twentyPercentDiscount" class=" pull-right glyphicon glyphicon-remove remove" ng-click="ctrl.products.removeTwentyPercentDiscount()"></span></li>
                             <li>
                                 <p class="pull-right sub-total">Basket Total: {{ctrl.products.subTotal() | currency:"£"}}</p>
                             </li>
