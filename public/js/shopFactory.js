@@ -18,9 +18,8 @@ smartShop.factory('Products', ['Flash', function(Flash) {
     service.getBasketTotal = function() {
         var result = 0;
         for (var i = shoppingBasket.length - 1; i >= 0; i--) {
-            result += shoppingBasket[i].price;
+            result += parseFloat(shoppingBasket[i].price);
         };
-        console.log(result)
         service.basketTotal = result;
         return result;
     };
