@@ -10,89 +10,31 @@ clothesShop.factory('Products', ['Flash', function(Flash) {
     service.fifteenPoundDiscount = false;
 
     service.productList = {
-        "Womens Footwear": [{
-            name: "Suede Shoes, Blue",
-            price: 42.00,
-            quantity: 4,
-            category: "Womens Footwear",
-            image: "images/blue-suede-shoes.jpg"
-        }, {
-            name: "Almond Toe Court Shoes, Patent Black",
-            price: 99.00,
-            quantity: 5,
-            category: "Womens Footwear",
-            image: "images/almond-toe-court-shoes.jpeg"
-        }],
-        "Womens Casual": [{
-            name: "Gold Button Cardigan, Black",
-            price: 167.00,
-            quantity: 6,
-            category: "Womens Casual",
-            image: "images/gold-button-cardigan.jpg"
-        }, {
-            name: "Cotton Shorts, Medium Red",
-            price: 30.00,
-            quantity: 5,
-            category: "Womens Casual",
-            image: "images/cotton-shorts-red.jpeg"
-        }],
-        "Womens Formal": [{
-            name: "Bird Print Dress, Black",
-            price: 270.00,
-            quantity: 10,
-            category: "Womens Formal",
-            image: "images/bird-print-dress-black.jpeg"
-        }, {
-            name: "Mid Twist Cut-Out Dress, Pink",
-            price: 540.00,
-            quantity: 5,
-            category: "Womens Formal",
-            image: "images/cut-out-dress-pink.jpeg"
-        }],
-        "Mens Footwear": [{
-            name: "Leather Driver Saddle Loafers, Tan",
-            price: 34.00,
-            quantity: 12,
-            category: "Mens Footwear",
-            image: "images/leather-driver-saddle-loafers.jpg"
-        }, {
-            name: "Flip Flops, Red",
-            price: 19.00,
-            quantity: 6,
-            category: "Mens Footwear",
-            image: "images/flip-flops.jpg"
-        }, {
-            name: "Flip Flops, Blue",
-            price: 19.00,
-            quantity: 0,
-            category: "Mens Footwear",
-            image: "images/flip-flops-blue.jpg"
-        }],
-        "Mens Casual": [{
-            name: "Fine Stripe Short Sleeve Shirt, Grey",
+        "Smart Technology Products": [{
+            name: "Smart Hub",
             price: 49.99,
-            quantity: 9,
-            category: "Mens Casual",
-            image: "images/short-sleeve-shirt-grey.jpeg"
+            quantity: 4,
+            image: "images/smart-hub.png"
         }, {
-            name: "Fine Stripe Short Sleeve Shirt, Green",
-            price: 39.99,
-            quantity: 3,
-            category: "Mens Casual",
-            image: "images/short-sleeve-shirt-green.jpg"
-        }],
-        "Mens Formal": [{
-            name: "Sharkskin Waistcoat, Charcoal",
-            price: 75.00,
+            name: "Motion Sensor",
+            price: 24.99,
+            quantity: 5,
+            image: "images/motion.png"
+        }, {
+            name: "Wireless Camera",
+            price: 99.99,
             quantity: 6,
-            category: "Mens Formal",
-            image: "images/waistcoat-grey.jpg"
+            image: "images/camera.png"
         }, {
-            name: "Lightweight Patch Pocket Blazer, Deer",
-            price: 175.50,
-            quantity: 1,
-            category: "Mens Formal",
-            image: "images/blazer-deer.jpeg"
+            name: "Smoke Sensor",
+            price: 19.99,
+            quantity: 5,
+            image: "images/smoke.png"
+        }, {
+            name: "Water Leak Sensor",
+            price: 14.99,
+            quantity: 10,
+            image: "images/flood.png"
         }]
     };
 
