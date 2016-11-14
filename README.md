@@ -95,6 +95,7 @@ Navigate to ```localhost:4567``` in your browser.
 **API**
 * ```Git clone https://github.com/timrobertson0122/rails-api.git```
 * ```cd rails-api/my_api```
+* ```rails db:setup``` // this should seed the database with the listed products
 * ```rails server```
 
 **NB**
@@ -105,7 +106,7 @@ Issues & Future Features
 ---------------
 
 * Fix CORS issues
-* Implement missing user stories - full checkout feature and order generation
+* Implement missing user stories - full checkout feature and order generation, missing promotions (quantity promos)
 * Ensure correct logic on all basket operations (slight issue with removal of voucher when more than one have been added)
 * Add images to items
 * Consider storage of item images and generated orders
