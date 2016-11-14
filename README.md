@@ -1,106 +1,113 @@
-[![Build Status](https://travis-ci.org/timrobertson0122/AngularShop.svg?branch=master)](https://travis-ci.org/timrobertson0122/AngularShop)
-[![Code Climate](https://codeclimate.com/github/timrobertson0122/AngularShop/badges/gpa.svg)](https://codeclimate.com/github/timrobertson0122/AngularShop)
+# SmartShop
 
-# AngularShop
-
-![Browser](public/images/screenshot-browser.png)
-
-Brief & Approach
+Brief
 ----------------
+The goal of the exercise is to create a checkout system that fulfils the criteria listed below :
 
-The task I was set was to develop a responsive website for a clothing retailer, satisfying the user stories listed below.
 
-Knowing it was expected to be responsive and given the time frame it was an easy decision to implement Bootstrap to speed this process up. I considered building in Rails but felt that, given the limited scope of the app, I could satisfy the user stories in a lighter, front-end framework - as such I felt an SPA in Angular would serve the purpose well, and give me a chance to improve my knowledge of Angular. If I were looking to scale this then Rails would be a wiser choice. 
+Items can be added to a basket
+Items can be removed from a basket
+Promotions can be applied to a basket
+Promotions can be removed from a basket
+Basket can be checked out - a total price is calculated
+Customer’s Email, Address and Credit card details are required to check out
+Customers will have an Order after checking out which contains all the basket items
 
-Naturally, as this project was to be fully test-driven, and Protractor was written by the Angular team for e2e testing, and is written in Jasmine, I opted to use this for my feature tests, with Karma executing my unit tests. I knew these should play nice with Travis-CI, and I opted for CodeClimate to review my test coverage.
 
-I initially toyed with storing my product data in an external JSON file and using Angular's $http service to provide the data to my app however, given the size of the data, realised it would be quicker to store it as a variable within the factory. Likewise I knew that the controller should not be handling business logic, so moved this out to the factory also, thus adhering to Angular's MVC principles, and simplifying my testing.
+Items :
+Name
+Price (£)
+Smart Hub
+49.99
+Motion Sensor
+24.99
+Wireless Camera
+99.99
+Smoke Sensor
+19.99
+Water Leak Sensor
+14.99
 
-I opted to use Express to serve my app, as whilst I had never used it previously I knew it to be a lightweight and fast framework, which would suit my purposes fine for this project. Finally, I implemented the angular-flash module to provide error messages and improve the customer's experience.
+
+Promotions :
+Codes :
+20%OFF -  20% off final cost cannot be used in conjunction with other codes
+5%OFF - 5% off final cost can be used in conjunction with other codes
+20POUNDSOFF - £20 off final cost can be used in conjunction with other codes
+
+
+Quantity :
+3 Motion sensors for £65.00
+2 Smoke Sensors for £35.00
+
+
+Deliverables :
+Create a database that can support the criteria
+Create pages to accommodate functionality
+Validation of intended functionality
+Brief written summary of approach, assumptions, caveats and notes
+Instructions on how to run the project
+Submission should be a GitHub repository
+
+
+Notes :
+No attention will be paid to the look and feel of this task. Pages can be plain HTML.
+
+Approach
+----------
+
+I opted to return to code I had previously written as it contained similar functionality for the required user stories in this challenge, and gave me a nice UI to work with. This was an SPA in AngularJS (1.0). For this task I needed to tweak the logic that handled the vouchers, and I additionally implemented the option to remove vouchers from the basket. The larger challenge for me in this task was to implement a database, as one was not used when I built the original app. I really felt that creating this entirely in Rails was overkill for what was required, as it would probably require the creating of additional database tables/entries. In-keeping with a flexible, decoupled infrastructure I opted to use Rails to serve up my Product data via a simple JSON API.
 
 Technologies
 ------------
 
-* Developed in AngularJS
-* Node Express server
-* Tested in Jasmine, Karma for unit tests, Protractor for e2e testing
+* AngularJS
+* Rails API
 * Styled with Bootstrap
-* angular-flash module for error message handling
 
 Prerequisites
 -------------
 
 You will need the following installed locally:  
 
+**App**
 * Node.js
 * NPM
 * Bower
 * Express
-* Protractor with webdriver-manager
+
+**API**
+* Ruby
+* Rails
 
 Site Setup
 ----------
 
+**App**
 * Execute the following in the command line:
-* ```Git clone https://github.com/timrobertson0122/AngularShop.git```
-* ```cd AngularShop```
+* ```Git clone https://github.com/timrobertson0122/smart-checkout.git```
+* ```cd smart-checkout```
 * ```bower install``` and ```npm install```
 * ```npm start```
 
 Navigate to ```localhost:4567``` in your browser.  
 
-Testing Setup
--------------
+**API**
+* ```Git clone https://github.com/timrobertson0122/rails-api.git```
+* ```cd rails-api/my_api```
+* ```rails server```
 
-For unit tests, run ```npm test``` in the command line (from within the project's root directory):
+**NB**
 
-![Unit Tests](public/images/unit-tests.png)  
+Due to Chrome CORS issues you may need to use this Chrome extension - Allow-Control-Allow-Origin: *
 
-For feature tests, run the following in the command line (from within the project's root directory):
-* ```npm start ``` (unless already running)
-* ```webdriver-manager start```
-* ```protractor test/e2e/conf.js```
-
-![Feature Tests](public/images/feature-tests.png)
-
-User Stories
-------------
-
-```
-As a user, I can view the products and their category, price and availability information.
-
-As a user I can add a product to my shopping cart
-
-As a user I can remove a product from my shopping cart
-
-As a user I can view the total price for the products in my shopping cart
-
-As a user I can apply a voucher to my shopping cart
-
-As a user I can view the total price for the products in my shopping cart with discounts applied
-
-As a user I am alerted when I apply an invalid voucher to my shopping cart
-
-As a user I am unable to add 'out of stock' products to my shopping cart
-
-Vouchers
---------
-
-£5.00 off your order
-
-£10 off when you spend over £50
-
-£15.00 off when you have bought at least one footwear item and spent over £75.00
-```
-
-Future Features
+Issues & Future Features
 ---------------
 
-* Better styling, ensuring visually appealing and fully responsive. Improve UX e.g. hover over image 'Add to Basket' text, make it clearer to see that an item is out of stock.
-* Update item quantity when multiple items are added to the basket, rather than a new entry for each duplicate item.
-* Consider implementing ng-show directive to only display available vouchers based on current products in shopping basket (would also clarify with product owner as to whether a maximum of one voucher can be applied to any order)
-* Individual product info pages
-* Attach a database for product information, probably MongoDB
-* Establish persistence across page refresh, add authenticated users
-* Search functionality using filter directive
-* Checkout functionality with payment processing, possibly Stripe
+* Fix CORS issues
+* Implement missing user stories - full checkout feature and order generation
+* Ensure correct logic on all basket operations (slight issue with removal of voucher when more than one have been added)
+* Add images to items
+* Consider storage of item images and generated orders
+* User login functionality
+* Tests! :)
