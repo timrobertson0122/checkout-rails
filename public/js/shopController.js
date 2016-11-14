@@ -1,5 +1,5 @@
-clothesShop.controller('ShopController', ['Products', function(Products) {
+smartShop.controller('ShopController', ['Products', function(Products) {
 
     this.products = Products;
-    
+
 }]);

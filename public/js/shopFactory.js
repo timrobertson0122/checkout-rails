@@ -1,4 +1,4 @@
-clothesShop.factory('Products', ['Flash', function(Flash) {
+smartShop.factory('Products', ['Flash', function(Flash) {
 
     var service = {};
     var shoppingBasket = [];
@@ -8,35 +8,6 @@ clothesShop.factory('Products', ['Flash', function(Flash) {
     service.fivePercentDiscount = false;
     service.twentyPoundDiscount = false;
     service.twentyPercentDiscount = false;
-
-    service.productList = {
-        "Smart Technology Products": [{
-            name: "Smart Hub",
-            price: 49.99,
-            quantity: 4,
-            image: "images/smart-hub.png"
-        }, {
-            name: "Motion Sensor",
-            price: 24.99,
-            quantity: 5,
-            image: "images/motion.png"
-        }, {
-            name: "Wireless Camera",
-            price: 99.99,
-            quantity: 6,
-            image: "images/camera.png"
-        }, {
-            name: "Smoke Sensor",
-            price: 19.99,
-            quantity: 5,
-            image: "images/smoke.png"
-        }, {
-            name: "Water Leak Sensor",
-            price: 14.99,
-            quantity: 10,
-            image: "images/flood.png"
-        }]
-    };
 
     service.availableDiscounts = function() {
         service.fivePercentDiscount = true;
@@ -49,7 +20,7 @@ clothesShop.factory('Products', ['Flash', function(Flash) {
         for (var i = shoppingBasket.length - 1; i >= 0; i--) {
             result += shoppingBasket[i].price;
         };
-        result = parseFloat(result.toPrecision(12));
+        console.log(result)
         service.basketTotal = result;
         return result;
     };
@@ -71,25 +42,15 @@ clothesShop.factory('Products', ['Flash', function(Flash) {
         };
     };
 
-    service.itemAvailable = function(item) {
-        return (parseInt(item.quantity) > 0);
-    };
-
     service.addItemToBasket = function(item) {
-        if (!service.itemAvailable(item)) {
-            Flash.create('danger', 'Sorry, that item is out of stock.');
-        } else {
-            shoppingBasket.push(item);
-            service.shoppingBasketVisible();
-            service.availableDiscounts();
-            item.quantity--;
-        };
+        shoppingBasket.push(item);
+        service.shoppingBasketVisible();
+        service.availableDiscounts();
         service.getBasketTotal();
     };
 
     service.removeItemFromBasket = function(item) {
         shoppingBasket.pop(item);
-        item.quantity++;
         service.shoppingBasketVisible();
         service.getBasketTotal();
     };

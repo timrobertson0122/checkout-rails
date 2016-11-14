@@ -1,1 +1,1 @@
-var clothesShop = angular.module("ClothesShop", ['flash']);
+var smartShop = angular.module("SmartShop", ['flash']);
