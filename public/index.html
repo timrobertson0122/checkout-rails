@@ -58,6 +58,9 @@
                             <li><a class="btn" id="ten-pound-voucher" ng-class="ctrl.products.twentyPoundDiscount ? 'btn-success' : 'btn-danger'" ng-click="ctrl.products.applyTwentyPoundDiscount()">£20 off voucher</a><span ng-show= "!ctrl.products.twentyPoundDiscount" class=" pull-right glyphicon glyphicon-remove remove" ng-click="ctrl.products.removeTwentyPoundDiscount()"></span></li>
                             <li><a class="btn" id="fifteen-pound-voucher" ng-class="ctrl.products.twentyPercentDiscount ? 'btn-success' : 'btn-danger'" ng-click="ctrl.products.applyTwentyPercentDiscount()">20% off Voucher</a><span ng-show= "!ctrl.products.twentyPercentDiscount" class=" pull-right glyphicon glyphicon-remove remove" ng-click="ctrl.products.removeTwentyPercentDiscount()"></span></li>
                             <li>
+                              <button ng-show="ctrl.products.shoppingBasketVisible()" ng-click="ctrl.products.removeDiscounts()" class="btn btn-info clearBasket">Remove Discounts</button>
+                            </li>
+                            <li>
                                 <p class="pull-right sub-total">Basket Total: {{ctrl.products.subTotal() | currency:"£"}}</p>
                             </li>
                             <li>

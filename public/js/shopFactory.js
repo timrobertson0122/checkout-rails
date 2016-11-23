@@ -2,18 +2,29 @@ smartShop.factory('Products', ['Flash', function(Flash) {
 
     var service = {};
     var shoppingBasket = [];
+    const NINETYFIVEPERCENT = 0.95;
+    const TWENTYPOUND = 20.00;
 
     service.basketTotal = 0;
     service.shoppingBasket = shoppingBasket;
     service.fivePercentDiscount = false;
     service.twentyPoundDiscount = false;
     service.twentyPercentDiscount = false;
+    service.ninetyFivePercent = NINETYFIVEPERCENT;
 
     service.availableDiscounts = function() {
         service.fivePercentDiscount = true;
         service.twentyPoundDiscount = true;
         service.twentyPercentDiscount = true;
     };
+
+    service.undoFivePercent = function() {
+      service.basketTotal = service.basketTotal * (100/95)
+    }
+
+    service.undoTwentyPound = function() {
+      service.basketTotal = service.basketTotal + TWENTYPOUND;
+    }
 
     service.getBasketTotal = function() {
         var result = 0;
@@ -42,11 +53,33 @@ smartShop.factory('Products', ['Flash', function(Flash) {
     };
 
     service.addItemToBasket = function(item) {
+      count = service.itemBasketQuantity()
+      if (shoppingBasket.includes(item)) {
+        count ++
+        console.log(count)
+      } else {
         shoppingBasket.push(item);
+      };
         service.shoppingBasketVisible();
         service.availableDiscounts();
         service.getBasketTotal();
+        // service.itemBasketQuantity(item);
     };
+
+    service.itemBasketQuantity = function(item) {
+      var count = 0;
+      for (var i = shoppingBasket.length - 1; i >= 0; i--) {
+        if (shoppingBasket[i].id === item.id) {
+          count ++;
+        }
+      }
+      return count;
+    }
+
+    service.checkforItem = function() {
+      service.countMotionSensorsInBasket
+
+    }
 
     service.removeItemFromBasket = function(item) {
         shoppingBasket.pop(item);
@@ -62,6 +95,13 @@ smartShop.factory('Products', ['Flash', function(Flash) {
         service.getBasketTotal();
     };
 
+    service.removeDiscounts = function() {
+      service.fivePercentDiscount = true;
+      service.twentyPoundDiscount = true;
+      service.twentyPercentDiscount = true;
+      service.getBasketTotal();
+    }
+
     service.shoppingBasketVisible = function() {
         if (service.shoppingBasket.length > 0) {
             return true;
@@ -70,7 +110,7 @@ smartShop.factory('Products', ['Flash', function(Flash) {
 
     service.applyFivePercentDiscount = function() {
       if (service.twentyPercentDiscount && service.fivePercentDiscount) {
-          service.basketTotal = (service.basketTotal * 0.95);
+          service.basketTotal = (service.basketTotal * service.ninetyFivePercent);
           service.fivePercentDiscount = false;
       } else {
           Flash.create('danger', 'Sorry, you cannot combine with 20% off voucher');
@@ -78,7 +118,7 @@ smartShop.factory('Products', ['Flash', function(Flash) {
     };
 
     service.removefivePercentDiscount = function() {
-      service.basketTotal += service.discountTotal();
+      service.undoFivePercent();
       service.fivePercentDiscount = true;
     }
 
@@ -92,7 +132,7 @@ smartShop.factory('Products', ['Flash', function(Flash) {
     };
 
     service.removeTwentyPoundDiscount = function() {
-      service.basketTotal += service.discountTotal();
+      service.undoTwentyPound();
       service.twentyPoundDiscount = true;
     };
 
